@@ -1,0 +1,53 @@
+# MultiAgents Chatbot Configuration
+
+chatbot:
+  # Model configuration
+  model:
+    provider: "gemini"
+    name: "gemini/gemini-1.5-flash"
+    temperature: 0.7
+    max_tokens: 1000
+    top_p: 0.95
+    
+  # Conversation settings
+  conversation:
+    max_history_length: 10  # Number of previous messages to maintain
+    context_window: 5       # Number of messages to include in context
+    save_history: true      # Auto-save conversation history
+    history_dir: "./conversations"
+    
+  # Default personality
+  default_personality: "default"
+  
+  # Response settings
+  response:
+    streaming_simulation: true  # Simulate typing effect
+    typing_speed: 0.03         # Seconds between characters
+    thinking_indicator: true   # Show "thinking..." message
+    
+  # CLI settings
+  cli:
+    prompt_style: "bold cyan"
+    bot_style: "bold green"
+    user_style: "bold yellow"
+    system_style: "dim italic"
+    clear_on_start: true
+    welcome_message: true
+    
+# Monitoring configuration
+monitoring:
+  enabled: true
+  log_conversations: true
+  metrics:
+    track_response_time: true
+    track_token_usage: true
+    track_errors: true
+    
+# Error handling
+error_handling:
+  retry_attempts: 3
+  retry_delay: 1.0
+  fallback_responses:
+    - "I apologize, but I'm having trouble processing that. Could you please try again?"
+    - "I seem to be experiencing technical difficulties. Let me try once more."
+    - "Sorry, I couldn't generate a proper response. Please rephrase your question."

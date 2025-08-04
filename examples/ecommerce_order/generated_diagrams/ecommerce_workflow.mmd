@@ -1,0 +1,23 @@
+```mermaid
+flowchart TD
+
+    Start([Start])
+    validate_order[validate_order\n(validate_order)]
+    check_inventory[check_inventory\n(check_inventory)\n[comp: release_inventory]]
+    process_payment[process_payment\n(process_payment)\n[comp: refund_payment]]
+    generate_confirmation[generate_confirmation\n(generate_order_confirmation)]
+    fulfill_order[fulfill_order\n(fulfill_order)]
+    notify_customer[notify_customer\n(notify_customer)]
+
+    Start --> validate_order
+    validate_order --> check_inventory
+    check_inventory --> process_payment
+    process_payment --> generate_confirmation
+    generate_confirmation --> fulfill_order
+    fulfill_order --> notify_customer
+    notify_customer --> End([End])
+
+    %% Compensation flows
+    check_inventory -.->|compensation| release_inventory
+    process_payment -.->|compensation| refund_payment
+```

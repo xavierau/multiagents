@@ -1,0 +1,76 @@
+# MultiAgents Framework - LLM Resources
+
+**Complete documentation and examples are available at: https://github.com/xavierau/multiagents**
+
+## Quick Start
+
+Install the framework:
+```bash
+pip install multiagents
+```
+
+Create a new project:
+```bash
+multiagents init my-project
+cd my-project
+```
+
+Install Claude Code agent (for LLM development assistance):
+```bash
+multiagents install-agent
+```
+
+## Core Documentation
+
+**Essential for LLM Implementation:**
+- 📖 [Framework Overview](https://github.com/xavierau/multiagents/blob/main/docs/llm/framework-overview.md) - Architecture and essential patterns
+- 🔧 [API Reference](https://github.com/xavierau/multiagents/blob/main/docs/llm/api-reference.md) - Complete API patterns and templates
+- ⚡ [Quick Reference](https://github.com/xavierau/multiagents/blob/main/docs/llm/quick-reference.md) - Code snippets and examples
+- 🛠️ [Workflow Patterns](https://github.com/xavierau/multiagents/blob/main/docs/llm/workflow-patterns.md) - Common implementation patterns
+- ❌ [Error Handling](https://github.com/xavierau/multiagents/blob/main/docs/llm/error-handling-patterns.md) - Robust error handling patterns
+- 🩺 [Troubleshooting](https://github.com/xavierau/multiagents/blob/main/docs/llm/troubleshooting.md) - Common issues and solutions
+
+## Working Examples
+
+**Ready-to-run implementations:**
+- 🛒 [E-commerce Order Processing](https://github.com/xavierau/multiagents/tree/main/examples/ecommerce_order) - Complete workflow with monitoring
+- 🤖 [DSPy Integration](https://github.com/xavierau/multiagents/tree/main/examples/dspy_example) - LLM-powered workflow examples
+- 📊 [Monitoring Demo](https://github.com/xavierau/multiagents/tree/main/examples/monitoring_demo) - Observability and debugging
+
+## Development Resources
+
+**For framework development:**
+- 🏗️ [Architecture Guide](https://github.com/xavierau/multiagents/blob/main/docs/architecture.md) - Deep dive into framework design
+- 👷 [Worker Development](https://github.com/xavierau/multiagents/blob/main/docs/worker-development.md) - Creating custom workers
+- 🔍 [Monitoring & Observability](https://github.com/xavierau/multiagents/blob/main/docs/monitoring.md) - Production monitoring setup
+- 🧪 [Testing Strategies](https://github.com/xavierau/multiagents/blob/main/docs/testing.md) - Comprehensive testing approaches
+
+## Key Concepts
+
+**Hybrid Event-Driven Orchestration Framework** for building scalable, fault-tolerant distributed systems.
+
+**Core Components:**
+- 🧠 **Orchestrator** - Centralized workflow state management
+- 👷 **Workers** - Stateless task specialists with @worker/@dspy_worker decorators  
+- 📨 **Event Bus** - Asynchronous Redis-based communication
+- 📊 **Monitoring** - Built-in observability and debugging
+
+**Supported Patterns:**
+- Saga pattern for distributed transactions
+- Compensation mechanisms for rollbacks
+- DSPy integration for LLM workflows
+- Hierarchical orchestration (workers as orchestrators)
+
+## CLI Commands
+
+```bash
+# Project management
+multiagents init <project-name> [--template <template>]
+multiagents list-templates
+multiagents install-agent
+
+# Available templates: basic, ecommerce, dspy
+```
+
+---
+*This lightweight package focuses on code distribution. Complete documentation, examples, and resources are maintained in the GitHub repository.*

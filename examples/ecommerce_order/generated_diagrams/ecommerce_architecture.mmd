@@ -1,0 +1,27 @@
+```mermaid
+graph TB
+    subgraph "Workflow Definition"
+        validate_order[validate_order\n(validate_order)]
+        check_inventory[check_inventory\n(check_inventory)]
+        process_payment[process_payment\n(process_payment)]
+        generate_confirmation[generate_confirmation\n(generate_order_confirmation)]
+        fulfill_order[fulfill_order\n(fulfill_order)]
+        notify_customer[notify_customer\n(notify_customer)]
+    end
+
+    subgraph "Event System"
+        O[Orchestrator]
+        EB[EventBus]
+        WM[WorkerManager]
+        W[Workers]
+        M[Monitoring]
+
+        O -->|command events| EB
+        EB -->|route| WM
+        WM -->|execute| W
+        W -->|result| WM
+        WM -->|result events| EB
+        EB -->|notify| O
+        EB -->|track| M
+    end
+```

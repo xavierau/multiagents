@@ -1,0 +1,24 @@
+# MultiAgents Framework (includes DSPy)
+multiagents>=0.1.0
+
+# CLI Interface
+click>=8.0.0
+rich>=13.0.0
+prompt-toolkit>=3.0.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# Configuration
+pyyaml>=6.0.0
+
+# Google Gemini support (via DSPy)
+google-generativeai>=0.3.0
+
+# Development dependencies
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+
+# Optional: Enhanced logging
+colorlog>=6.0.0

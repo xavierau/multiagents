@@ -1,0 +1,36 @@
+# Monitoring Configuration Example
+# Save this as monitoring.yaml in your project root
+
+logging:
+  default_logger: "composite"  # Use both file and console
+  level: "INFO"
+  json_format: true
+  include_metadata: true
+  
+  # File logging settings
+  file_path: "./logs/multiagents.log"
+  max_size_mb: 50
+  backup_count: 3
+  
+  # Console logging settings
+  use_colors: true
+  console_min_level: "WARNING"  # Only show warnings+ on console
+
+event_monitoring:
+  enabled: true
+  max_trace_history: 5000
+  cleanup_interval_minutes: 30
+  trace_retention_hours: 12
+  track_performance: true
+
+worker_monitoring:
+  enabled: true
+  health_check_interval_seconds: 15
+  metrics_retention_hours: 12
+  max_metrics_per_worker: 500
+
+metrics:
+  enabled: true
+  collection_interval_seconds: 30
+  retention_days: 3
+  export_format: "json"

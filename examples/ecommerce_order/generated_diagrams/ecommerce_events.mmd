@@ -1,0 +1,85 @@
+```mermaid
+sequenceDiagram
+    participant O as Orchestrator
+    participant EB as EventBus
+    participant WM as WorkerManager
+    participant W as Workers
+    participant M as Monitoring
+
+    Note over O,M: System Startup
+    O->>EB: subscribe to result events
+    WM->>EB: subscribe to command events
+
+    Note over O,M: Workflow Execution
+    Note over O,W: Step 1: validate_order
+    O->>EB: command.validate_order
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(validate_order)
+    W->>WM: result
+    WM->>EB: result.validate_order
+    EB->>M: track event completion
+    EB->>O: route result
+
+    Note over O,W: Step 2: check_inventory
+    O->>EB: command.check_inventory
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(check_inventory)
+    W->>WM: result
+    WM->>EB: result.check_inventory
+    EB->>M: track event completion
+    EB->>O: route result
+    Note over O,W: Compensation Available: release_inventory
+
+    Note over O,W: Step 3: process_payment
+    O->>EB: command.process_payment
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(process_payment)
+    W->>WM: result
+    WM->>EB: result.process_payment
+    EB->>M: track event completion
+    EB->>O: route result
+    Note over O,W: Compensation Available: refund_payment
+
+    Note over O,W: Step 4: generate_confirmation
+    O->>EB: command.generate_order_confirmation
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(generate_order_confirmation)
+    W->>WM: result
+    WM->>EB: result.generate_order_confirmation
+    EB->>M: track event completion
+    EB->>O: route result
+
+    Note over O,W: Step 5: fulfill_order
+    O->>EB: command.fulfill_order
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(fulfill_order)
+    W->>WM: result
+    WM->>EB: result.fulfill_order
+    EB->>M: track event completion
+    EB->>O: route result
+
+    Note over O,W: Step 6: notify_customer
+    O->>EB: command.notify_customer
+    EB->>M: track event dispatch
+    EB->>WM: route command
+    WM->>M: track event pickup
+    WM->>W: process(notify_customer)
+    W->>WM: result
+    WM->>EB: result.notify_customer
+    EB->>M: track event completion
+    EB->>O: route result
+
+    Note over O,M: Workflow Status
+    O->>EB: status.workflow
+    EB->>M: track status event
+```

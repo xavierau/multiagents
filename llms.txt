@@ -1,0 +1,179 @@
+# MultiAgents Framework
+
+A hybrid event-driven orchestration framework for building intelligent, multi-step, and fault-tolerant applications.
+
+## Overview
+
+MultiAgents combines orchestration (centralized control) with event-driven architecture (loose coupling) to enable complex workflows with built-in compensation mechanisms (saga pattern). The framework is designed for building resilient, scalable applications with support for LLM integration through DSPy.
+
+## Documentation Index
+
+### Core Documentation
+
+#### Framework Understanding
+- `/docs/llm/framework-overview.md` - Complete framework architecture, core concepts, design principles, and essential patterns
+- `/docs/guides/architecture.md` - Deep dive into hybrid orchestration/choreography architecture
+- `/docs/README.md` - Main documentation entry point with navigation structure
+
+#### API Reference
+- `/docs/llm/api-reference.md` - Comprehensive API patterns, data structures, and complete application templates
+- `/docs/api/core.md` - Core interfaces and contracts (IWorker, IEventBus, IOrchestrator)
+- `/docs/api/orchestrator.md` - Orchestrator API for workflow management
+- `/docs/api/workers.md` - Worker SDK API and decorators
+- `/docs/api/event_bus.md` - Event bus communication patterns
+- `/docs/api/monitoring.md` - Monitoring and observability APIs
+
+#### Quick References
+- `/docs/llm/quick-reference.md` - Essential code snippets and common patterns for rapid development
+- `/docs/guides/getting-started.md` - Step-by-step guide for new users
+- `/CLAUDE.md` - Project-specific instructions and conventions
+
+### Implementation Patterns
+
+#### Workflow Patterns
+- `/docs/llm/workflow-patterns.md` - Sequential, saga, parallel, conditional, and event-driven workflow patterns
+- `/docs/guides/worker-development.md` - Comprehensive worker development guide
+
+#### Error Handling
+- `/docs/llm/error-handling-patterns.md` - Validation, resource, service errors, saga implementation, circuit breakers
+- `/docs/tutorials/error-handling.md` - Step-by-step tutorial on building resilient workflows
+
+#### DSPy Integration
+- `/docs/guides/dspy-integration.md` - Complete guide for LLM integration using DSPy
+- `/docs/tutorials/dspy-workers.md` - Tutorial on building intelligent workers with DSPy
+- `/docs/llm/dspy-integration-patterns.md` - (referenced in llm docs)
+
+### Examples
+
+#### Simple Workflow Example
+- `/examples/simple_workflow.py` - Basic data processing workflow
+- `/docs/examples/simple-workflow.md` - Detailed walkthrough
+
+#### E-commerce Order Processing
+- `/examples/ecommerce_order/main.py` - Complete saga pattern implementation
+- `/examples/ecommerce_order/workers.py` - Worker implementations with compensations
+- `/examples/ecommerce_order/workflow.py` - Workflow definition
+- `/docs/examples/ecommerce-order.md` - Comprehensive documentation
+- `/examples/ecommerce_order/generated_diagrams/ecommerce_workflow_ascii.txt` - Visual workflow representation
+
+#### Monitoring Demo
+- `/examples/monitoring_demo.py` - Monitoring and observability features
+- `/docs/examples/monitoring-demo.md` - Monitoring patterns and usage
+
+### Tutorials
+
+1. **Basic Workflow** - `/docs/tutorials/basic-workflow.md`
+   - First workflow, workers, execution monitoring
+
+2. **Error Handling** - `/docs/tutorials/error-handling.md`
+   - Saga pattern, compensations, resilience patterns
+
+3. **DSPy Workers** - `/docs/tutorials/dspy-workers.md`
+   - LLM integration, structured output, post-processing
+
+4. **Tutorials Overview** - `/docs/tutorials/README.md`
+   - Progressive learning path through all tutorials
+
+### Advanced Topics
+
+#### Performance
+- `/docs/guides/performance.md` - Optimization strategies, scaling patterns, load testing
+- `/docs/llm/performance-patterns.md` - (referenced in llm docs)
+
+#### Monitoring
+- `/docs/guides/monitoring.md` - Production monitoring, observability, metrics collection
+- `/docs/llm/monitoring-patterns.md` - (referenced in llm docs)
+
+#### Troubleshooting
+- `/docs/llm/troubleshooting.md` - Common issues, diagnostic strategies, and solutions
+
+### Code Organization
+
+#### Core Components
+- `/orchestrator/` - Orchestrator implementation
+  - `orchestrator.py` - Main orchestrator logic
+  - `workflow.py` - Workflow builder and definition
+  - `state_manager.py` - State persistence
+
+- `/worker_sdk/` - Worker SDK
+  - `worker.py` - Worker decorators and base implementation
+  - `dspy_worker.py` - DSPy integration
+
+- `/event_bus/` - Event bus implementations
+  - `redis_event_bus.py` - Redis pub/sub implementation
+  - `interfaces.py` - Event bus interface
+
+- `/core/` - Core interfaces and factories
+  - `interfaces.py` - Core contracts
+  - `factory.py` - Framework factory
+  - `exceptions.py` - Exception types
+
+- `/monitoring/` - Monitoring system
+  - `logger.py` - Logging implementations
+  - `event_monitor.py` - Event tracking
+  - `worker_monitor.py` - Worker performance
+
+### Key Files to Understand
+
+1. **Project Setup**
+   - `/setup.py` - Package configuration
+   - `/requirements.txt` - Dependencies
+   - `/pytest.ini` - Test configuration
+
+2. **Entry Points**
+   - `/run_examples.py` - Example runner script
+   - `/__init__.py` - Package exports
+
+3. **Documentation**
+   - `/README.md` - Project overview
+   - `/BACKLOG.md` - Development tasks
+   - `/prd.md` - Product requirements
+
+### Testing
+
+- `/tests/` - Test suite
+  - Unit tests for individual components
+  - Integration tests for workflows
+  - Test fixtures and utilities
+
+### Implementation Guidelines
+
+When implementing with MultiAgents:
+
+1. **Start with**: `/docs/llm/framework-overview.md` for conceptual understanding
+2. **Reference**: `/docs/llm/api-reference.md` for implementation patterns
+3. **Use**: `/docs/llm/quick-reference.md` for code snippets
+4. **Study**: Examples in `/examples/` for complete implementations
+5. **Follow**: Patterns in `/docs/llm/workflow-patterns.md` for specific use cases
+6. **Debug with**: `/docs/llm/troubleshooting.md` for issue resolution
+
+### Environment Setup
+
+Required environment variables:
+- `REDIS_URL` - Redis connection (default: redis://localhost:6379)
+- `OPENAI_API_KEY` - For DSPy workers
+- `ENVIRONMENT` - development/staging/production
+- `LOG_LEVEL` - Logging level
+
+### Quick Start Example
+
+```python
+# See /examples/simple_workflow.py for complete implementation
+from multiagents import worker
+from multiagents.core.factory import create_simple_framework
+from multiagents.orchestrator.workflow import WorkflowBuilder
+
+# Define worker
+@worker("process_data")
+async def process_data(context):
+    return {"result": context["data"].upper()}
+
+# Create workflow
+workflow = (WorkflowBuilder("my_workflow")
+    .add_step("process", "process_data")
+    .build())
+
+# Setup and run - see examples for complete code
+```
+
+For any specific implementation needs, navigate to the relevant documentation file listed above.

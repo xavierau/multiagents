@@ -1,0 +1,42 @@
+# MultiAgents Monitoring Configuration
+
+# Logging configuration
+logging:
+  default_logger: "composite"  # Options: file, console, composite
+  level: "INFO"                # Options: DEBUG, INFO, WARN, ERROR
+  file_path: "./logs/{PROJECT_NAME}.log"
+  max_file_size_mb: 50
+  backup_count: 3
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Event monitoring configuration  
+event_monitoring:
+  enabled: true
+  trace_retention_hours: 24
+  cleanup_interval_minutes: 60
+  max_traces_per_transaction: 1000
+
+# Worker monitoring configuration
+worker_monitoring:
+  enabled: true
+  health_check_interval_seconds: 30
+  performance_window_minutes: 15
+  error_threshold_percentage: 10.0
+  
+# Metrics collection
+metrics:
+  enabled: true
+  collection_interval_seconds: 30
+  retention_hours: 72
+  
+  # Metrics to collect
+  collect_event_metrics: true
+  collect_worker_metrics: true
+  collect_system_metrics: false
+
+# Alerting (future feature)
+alerting:
+  enabled: false
+  # webhook_url: "https://hooks.slack.com/..."
+  # error_threshold: 5
+  # latency_threshold_ms: 5000

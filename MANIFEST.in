@@ -1,0 +1,50 @@
+# Include essential project files
+include README.md
+include LICENSE
+include CHANGELOG.md
+include llms.txt
+include requirements.txt
+include pyproject.toml
+
+# Include documentation
+recursive-include docs *.md
+recursive-include docs *.yaml
+recursive-include docs *.yml
+recursive-include docs *.txt
+
+# Include examples
+recursive-include examples *.py
+recursive-include examples *.md
+recursive-include examples *.yaml
+recursive-include examples *.yml
+recursive-include examples *.txt
+recursive-include examples *.mmd
+
+# Include package resources
+recursive-include multiagents/resources *
+recursive-include multiagents/resources/agents *.md
+recursive-include multiagents/resources/templates *
+
+# Include type hints
+include multiagents/py.typed
+
+# Exclude development and build files
+exclude .gitignore
+exclude .pre-commit-config.yaml
+exclude tox.ini
+exclude Makefile
+exclude .coverage
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * *.egg-info
+recursive-exclude * .DS_Store
+recursive-exclude htmlcov *
+recursive-exclude .pytest_cache *
+recursive-exclude tests *
+recursive-exclude build *
+recursive-exclude dist *
+recursive-exclude .git *
+recursive-exclude .venv *
+recursive-exclude venv *
+recursive-exclude env *
+recursive-exclude logs *.log

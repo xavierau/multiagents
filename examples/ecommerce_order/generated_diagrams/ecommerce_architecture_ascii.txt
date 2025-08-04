@@ -1,0 +1,97 @@
+Workflow: ecommerce_order_processing
+====================================
+
+┌───────────────────────────────────────┐
+│ validate_order (validate_order) [30s] │
+└───────────────────────────────────────┘
+     │
+     ▼
+
+┌───────────────────────────────────────────────────────────────────┐
+│ check_inventory (check_inventory) [comp: release_inventory] [30s] │
+└───────────────────────────────────────────────────────────────────┘
+     │
+     ▼
+
+┌────────────────────────────────────────────────────────────────┐
+│ process_payment (process_payment) [comp: refund_payment] [60s] │
+└────────────────────────────────────────────────────────────────┘
+     │
+     ▼
+
+┌───────────────────────────────────────────────────────────┐
+│ generate_confirmation (generate_order_confirmation) [30s] │
+└───────────────────────────────────────────────────────────┘
+     │
+     ▼
+
+┌─────────────────────────────────────┐
+│ fulfill_order (fulfill_order) [30s] │
+└─────────────────────────────────────┘
+     │
+     ▼
+
+┌─────────────────────────────────────────┐
+│ notify_customer (notify_customer) [30s] │
+└─────────────────────────────────────────┘
+
+Event Flow: ecommerce_order_processing
+======================================
+
+Components & Event Flow:
+
+┌─────────────┐    ┌──────────┐    ┌──────────────┐    ┌─────────┐
+│ Orchestrator│───▶│ EventBus │◀──▶│ WorkerManager│───▶│ Workers │
+└─────────────┘    └──────────┘    └──────────────┘    └─────────┘
+        │               │                    │              │
+        ▼               ▼                    ▼              ▼
+  [publishes]      [routes]           [subscribes]    [processes]
+
+Event Types:
+────────────
+• status.workflow           - Workflow status updates
+• command.validate_order    - Commands for validate_order worker
+• result.validate_order     - Results from validate_order worker
+• command.check_inventory   - Commands for check_inventory worker
+• result.check_inventory    - Results from check_inventory worker
+• command.release_inventory - Compensation commands for release_inventory
+• result.release_inventory  - Compensation results from release_inventory
+• command.process_payment   - Commands for process_payment worker
+• result.process_payment    - Results from process_payment worker
+• command.refund_payment    - Compensation commands for refund_payment
+• result.refund_payment     - Compensation results from refund_payment
+• command.generate_order_confirmation - Commands for generate_order_confirmation worker
+• result.generate_order_confirmation - Results from generate_order_confirmation worker
+• command.fulfill_order     - Commands for fulfill_order worker
+• result.fulfill_order      - Results from fulfill_order worker
+• command.notify_customer   - Commands for notify_customer worker
+• result.notify_customer    - Results from notify_customer worker
+
+Step Event Flows:
+─────────────────
+
+validate_order (validate_order):
+  Orchestrator ──[command.validate_order]──▶ WorkerManager
+  Orchestrator ◀─[result.validate_order]──── WorkerManager
+
+check_inventory (check_inventory):
+  Orchestrator ──[command.check_inventory]──▶ WorkerManager
+  Orchestrator ◀─[result.check_inventory]──── WorkerManager
+  Orchestrator ──[compensation.release_inventory]──▶ WorkerManager
+
+process_payment (process_payment):
+  Orchestrator ──[command.process_payment]──▶ WorkerManager
+  Orchestrator ◀─[result.process_payment]──── WorkerManager
+  Orchestrator ──[compensation.refund_payment]──▶ WorkerManager
+
+generate_confirmation (generate_order_confirmation):
+  Orchestrator ──[command.generate_order_confirmation]──▶ WorkerManager
+  Orchestrator ◀─[result.generate_order_confirmation]──── WorkerManager
+
+fulfill_order (fulfill_order):
+  Orchestrator ──[command.fulfill_order]──▶ WorkerManager
+  Orchestrator ◀─[result.fulfill_order]──── WorkerManager
+
+notify_customer (notify_customer):
+  Orchestrator ──[command.notify_customer]──▶ WorkerManager
+  Orchestrator ◀─[result.notify_customer]──── WorkerManager
