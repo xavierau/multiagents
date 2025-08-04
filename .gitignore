@@ -142,8 +142,8 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env.example
+# dotenv environment variables file (but allow .env.example)
+# .env.example should be committed as a template
 
 # Project-specific
 /temp/
