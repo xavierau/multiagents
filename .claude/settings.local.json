@@ -44,7 +44,9 @@
       "Bash(git add:*)",
       "Bash(git tag:*)",
       "Bash(git push:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git rm:*)",
+      "Bash(git filter-branch:*)"
     ],
     "deny": []
   }

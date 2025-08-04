@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: multiagents-framework
-Version: 0.1.0
+Version: 0.1.1
 Summary: Hybrid Event-Driven Orchestration Framework
 Home-page: https://github.com/xavierau/multiagents
 Author: MultiAgents Team
@@ -11,7 +11,7 @@ Project-URL: Documentation, https://github.com/xavierau/multiagents/tree/main/do
 Project-URL: Repository, https://github.com/xavierau/multiagents
 Project-URL: Issues, https://github.com/xavierau/multiagents/issues
 Project-URL: Changelog, https://github.com/xavierau/multiagents/blob/main/CHANGELOG.md
-Keywords: orchestration,workflow,event-driven,saga,dspy,llm
+Keywords: orchestration,workflow,event-driven,saga,dspy,llm,agents,conversational-ai,multi-agent
 Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
@@ -59,16 +59,30 @@ Dynamic: requires-python
 
 # MultiAgents Framework
 
-A hybrid event-driven orchestration framework for building scalable, fault-tolerant distributed systems using a combination of orchestration and choreography patterns.
+**🚀 LLM-Powered Multi-Agent Orchestration Framework** 
 
-## Features
+A hybrid event-driven orchestration framework designed specifically for **LLM agents and AI developers**. Build intelligent, conversational, and autonomous multi-agent systems with built-in DSPy integration, real-time collaboration, and production-ready tooling.
 
-- **Hybrid Architecture**: Combines centralized orchestration with decoupled event-driven communication
-- **DSPy Integration**: Built-in support for LLM-powered workers using DSPy
-- **Comprehensive Monitoring**: Complete observability with event tracking, worker performance monitoring, and structured logging
-- **Saga Pattern**: Built-in support for distributed transactions with compensation actions
-- **Developer-Friendly**: Simple decorator-based API for creating workers
-- **Scalable**: Horizontally scalable components with Redis backend
+⚠️ **Experimental**: This framework is in active development. APIs may change between versions.
+
+## 🎯 Built for LLM Agents
+
+**Perfect for AI developers building:**
+- 🤖 **Conversational AI Systems** - Multi-agent chat with intelligent routing
+- 🔍 **Research Assistants** - Collaborative research with specialized agents  
+- 🧠 **LLM-Driven Workflows** - Dynamic orchestration with real-time decisions
+- 🛠️ **Tool-Using Agents** - Multi-modal agents with external integrations
+- 📊 **Data Analysis Pipelines** - Intelligent data processing with LLM insights
+
+## ✨ Key Features
+
+- **🧠 LLM-First Design**: Built-in DSPy integration with Gemini, GPT, Claude support
+- **💬 Conversational AI**: Intelligent routing between conversation and task execution
+- **🔧 Tool Integration**: Easy integration with web search, calculators, APIs
+- **🎭 Multi-Agent Collaboration**: Specialized agents working together seamlessly
+- **📊 Production Monitoring**: Complete observability designed for LLM workflows
+- **🔄 Event-Driven**: Scalable async communication perfect for AI workloads
+- **🛡️ Fault Tolerance**: Built-in compensation and rollback for complex workflows
 
 ## Quick Start
 
@@ -91,58 +105,62 @@ docker run -d -p 6379:6379 redis:alpine
 
 ### Installation
 
-1. Clone and navigate to the project:
+**Install from PyPI (Recommended):**
 ```bash
-git clone <repository-url>
-cd multiagents
+# Install the framework
+pip install multiagents-framework
+
+# Or with uv (faster)
+uv add multiagents-framework
 ```
+
+**Development Installation:**
+```bash
+1. Clone the repository:
+git clone https://github.com/xavierau/multiagents.git
+cd multiagents
 
 2. Create virtual environment:
-```bash
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+3. Install in development mode:
+pip install -e .
 ```
 
-3. Install dependencies:
+**Verify Installation:**
 ```bash
-pip install -r requirements.txt
+multiagents --version
+multiagents --help
 ```
 
-### Running Examples
+### 🚀 Quick Start Examples
 
-**Option 1: Use the example runner (recommended)**
+**Run Interactive Examples:**
 ```bash
+# Interactive example menu
 python run_examples.py
+
+# Or run specific examples:
+multiagents --examples
 ```
 
-**Option 2: Run examples directly**
+**Available Examples:**
+1. **💬 Smart Research Assistant** - LLM-powered conversational research with web search
+2. **🤖 Interactive Chatbot** - Multi-personality conversational AI with DSPy
+3. **🛒 E-commerce Workflow** - Complete order processing with compensations  
+4. **📊 Monitoring Demo** - Production-ready observability features
+
+**Try the Smart Research Assistant:**
 ```bash
-# Simple workflow
-python -c "
-import sys
-sys.path.insert(0, '.')
-import asyncio
-from examples.simple_workflow import main
-asyncio.run(main())
-"
+# Navigate to example (if installed from source)
+cd examples/smart_research_assistant
+python cli.py
 
-# E-commerce example with monitoring
-python -c "
-import sys
-sys.path.insert(0, '.')
-import asyncio
-from examples.ecommerce_order.main import main
-asyncio.run(main())
-"
-
-# Comprehensive monitoring demo
-python -c "
-import sys
-sys.path.insert(0, '.')
-import asyncio
-from examples.monitoring_example import main
-asyncio.run(main())
-"
+# Ask questions like:
+# "What are the latest trends in renewable energy?"
+# "Calculate compound interest on $5000 at 8% for 3 years"
+# "Hi!" (conversational mode)
 ```
 
 ## Framework Overview
@@ -233,25 +251,36 @@ worker_monitoring:
   health_check_interval_seconds: 30
 ```
 
-## Examples
+## 📋 Example Applications
 
-### 1. Simple Workflow
-Basic workflow demonstrating core framework features.
+### 1. 💬 Smart Research Assistant  
+**LLM-powered conversational research system**
+- Intelligent routing between conversation and research
+- Multi-agent collaboration (Coordinator, Researcher, Analyst, Formatter)
+- Real Google Custom Search API integration
+- Gemini LLM with DSPy optimization
+- Production-ready configuration system
 
-### 2. E-commerce Order Processing
-Complete order processing pipeline with:
-- Order validation
-- Inventory checking with compensation
-- Payment processing with refund compensation
-- DSPy-powered order confirmation generation
-- Fulfillment and customer notification
+### 2. 🤖 Interactive Chatbot
+**Multi-personality conversational AI**
+- DSPy-powered natural conversations
+- Configurable personalities and responses  
+- Context-aware conversation management
+- Real-time interaction with memory
 
-### 3. Monitoring Demonstration
-Comprehensive monitoring example showing:
-- Event lifecycle tracking
-- Worker performance monitoring
-- Error handling and recovery
-- System metrics collection
+### 3. 🛒 E-commerce Order Processing
+**Production-ready order workflow**
+- Multi-step order validation and processing
+- Intelligent inventory and payment handling
+- Automatic compensation and rollback
+- LLM-generated confirmations and notifications
+
+### 4. 📊 Production Monitoring
+**Enterprise-grade observability**
+- Real-time agent performance monitoring
+- Event lifecycle tracking and debugging
+- Structured logging with automatic rotation
+- Error pattern analysis and alerting
 
 ## Development
 
@@ -314,6 +343,34 @@ This approach provides the benefits of both patterns:
 3. Include tests for new functionality
 4. Update documentation and examples
 
-## License
+## 🔗 LLM Agent Integration
 
-[License information to be added]
+**Claude Code Integration:**
+This framework includes specialized Claude Code subagents for enhanced development:
+
+```bash
+# Auto-install Claude subagent (when using Claude Code)
+multiagents install-agent claude-code
+
+# Or manually copy the agent
+cp multiagents/agents/multiagents.md ~/.claude/agents/
+```
+
+**llms.txt Support:**
+This project includes `llms.txt` for LLM consumption with documentation pointers to GitHub for always up-to-date information.
+
+## 🌐 Community & Support
+
+- **GitHub**: [https://github.com/xavierau/multiagents](https://github.com/xavierau/multiagents)
+- **PyPI**: [https://pypi.org/project/multiagents-framework/](https://pypi.org/project/multiagents-framework/)
+- **Issues**: [Report bugs and request features](https://github.com/xavierau/multiagents/issues)
+- **Discussions**: [Community discussions and help](https://github.com/xavierau/multiagents/discussions)
+
+## 📜 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+---
+
+**Built with ❤️ for the LLM agent community**  
+*Making multi-agent AI systems accessible, reliable, and production-ready.*
