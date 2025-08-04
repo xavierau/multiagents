@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "wheel", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "multiagents"
+name = "multiagents-framework"
 version = "0.1.0"
 description = "Hybrid Event-Driven Orchestration Framework"
 readme = "README.md"
