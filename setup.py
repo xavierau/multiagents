@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 # The main configuration is now in pyproject.toml
 
 setup(
-    name="multiagents",
-    version="0.1.0",
+    name="multiagents-framework",
+    version="0.1.1",
     description="Hybrid Event-Driven Orchestration Framework",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -15,9 +15,9 @@ setup(
     packages=find_packages(exclude=["tests", "examples", "docs"]),
     package_data={
         "multiagents": [
-            "resources/**/*",
-            "resources/agents/*.md",
-            "resources/templates/**/*",
+            "llms.txt",
+            "agents/*.md",
+            "templates/**/*",
             "py.typed",
         ],
     },
@@ -74,7 +74,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: System :: Distributed Computing",
     ],
-    keywords="orchestration workflow event-driven saga dspy llm",
+    keywords="orchestration workflow event-driven saga dspy llm agents conversational-ai multi-agent",
     project_urls={
         "Homepage": "https://github.com/xavierau/multiagents",
         "Documentation": "https://github.com/xavierau/multiagents/tree/main/docs",

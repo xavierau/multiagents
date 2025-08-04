@@ -7,6 +7,7 @@ import os
 import sys
 import shutil
 import argparse
+import asyncio
 from pathlib import Path
 from typing import Optional
 
@@ -100,6 +101,26 @@ def install_agent() -> bool:
         return False
 
 
+def run_examples_menu() -> None:
+    """Run the interactive examples menu."""
+    try:
+        # Try to import and run examples from the project root
+        import run_examples
+        asyncio.run(run_examples.main())
+    except ImportError:
+        print("❌ Examples not available in this installation mode")
+        print("💡 To run examples:")
+        print("   1. Clone the repository: git clone https://github.com/xavierau/multiagents.git")
+        print("   2. cd multiagents")
+        print("   3. python run_examples.py")
+        print()
+        print("📚 Available examples:")
+        print("   • Smart Research Assistant (Conversational AI)")
+        print("   • Interactive Chatbot (Multi-personality AI)")
+        print("   • E-commerce Order Processing")
+        print("   • Monitoring & Observability Demo")
+
+
 def list_templates() -> None:
     """List available project templates."""
     templates_path = get_package_resource_path("templates")
@@ -135,6 +156,7 @@ def main():
 Examples:
   multiagents init my-project                 # Create basic project
   multiagents init my-shop --template ecommerce  # Create e-commerce project
+  multiagents examples                        # Run interactive examples
   multiagents install-agent                   # Install Claude Code agent
   multiagents list-templates                  # Show available templates
         """
@@ -157,6 +179,9 @@ Examples:
     # Version command
     subparsers.add_parser('version', help='Show version information')
     
+    # Examples command
+    subparsers.add_parser('examples', help='Run interactive examples menu')
+    
     args = parser.parse_args()
     
     if not args.command:
@@ -177,6 +202,9 @@ Examples:
     elif args.command == 'version':
         from multiagents import __version__
         print(f"MultiAgents Framework v{__version__}")
+        
+    elif args.command == 'examples':
+        run_examples_menu()
     
     else:
         parser.print_help()

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multiagents-framework"
-version = "0.1.0"
+version = "0.1.1"
 description = "Hybrid Event-Driven Orchestration Framework"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -12,7 +12,7 @@ license = {text = "MIT"}
 authors = [
     {name = "MultiAgents Team", email = "info@multiagents.dev"}
 ]
-keywords = ["orchestration", "workflow", "event-driven", "saga", "dspy", "llm"]
+keywords = ["orchestration", "workflow", "event-driven", "saga", "dspy", "llm", "agents", "conversational-ai", "multi-agent"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -77,9 +77,9 @@ include-package-data = true
 
 [tool.setuptools.package-data]
 multiagents = [
-    "resources/**/*",
-    "resources/agents/*.md",
-    "resources/templates/**/*",
+    "llms.txt",
+    "agents/*.md", 
+    "templates/**/*",
     "py.typed",
 ]
 

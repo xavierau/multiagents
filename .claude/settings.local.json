@@ -41,7 +41,10 @@
       "Bash(PYTHONPATH=/Users/xavierau/Code/python/multiagents python -c \"\nfrom dotenv import load_dotenv\nimport os\nload_dotenv(''/Users/xavierau/Code/python/multiagents/.env'')\nprint(''After loading .env:'')\nprint(''GOOGLE_API_KEY:'', bool(os.getenv(''GOOGLE_API_KEY'')))\nprint(''GOOGLE_SEARCH_API_KEY:'', bool(os.getenv(''GOOGLE_SEARCH_API_KEY'')))\nprint(''GOOGLE_SEARCH_ENGINE_ID:'', bool(os.getenv(''GOOGLE_SEARCH_ENGINE_ID'')))\nprint(''Keys preview:'')\napi_key = os.getenv(''GOOGLE_API_KEY'')\nif api_key: print(''GOOGLE_API_KEY starts with:'', api_key[:10] + ''...'')\nsearch_key = os.getenv(''GOOGLE_SEARCH_API_KEY'') \nif search_key: print(''GOOGLE_SEARCH_API_KEY starts with:'', search_key[:10] + ''...'')\nengine_id = os.getenv(''GOOGLE_SEARCH_ENGINE_ID'')\nif engine_id: print(''GOOGLE_SEARCH_ENGINE_ID:'', engine_id[:20] + ''...'')\n\")",
       "Bash(PYTHONPATH=/Users/xavierau/Code/python/multiagents python -c \"\nimport os\nfrom dotenv import load_dotenv\n\n# Load from project root\nload_dotenv(''../../../.env'')\n\nprint(''GOOGLE_SEARCH_API_KEY:'', os.getenv(''GOOGLE_SEARCH_API_KEY''))\nprint(''GOOGLE_SEARCH_ENGINE_ID:'', os.getenv(''GOOGLE_SEARCH_ENGINE_ID''))\n\n# Test the web search module\nfrom tools.web_search import web_search\nprint(''GoogleCustomSearch has_credentials:'', web_search.has_credentials)\nprint(''GoogleCustomSearch api_key:'', bool(web_search.api_key))\nprint(''GoogleCustomSearch search_engine_id:'', web_search.search_engine_id)\n\")",
       "Bash(PYTHONPATH:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git tag:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

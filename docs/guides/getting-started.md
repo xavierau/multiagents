@@ -1,14 +1,20 @@
 # Getting Started with MultiAgents Framework
 
-Welcome! This guide will get you up and running with the MultiAgents Framework in just a few minutes.
+🚀 **LLM-Powered Multi-Agent Orchestration Framework**
+
+Welcome! This guide will get you up and running with the MultiAgents Framework - designed specifically for **LLM agents and AI developers**.
 
 ## What is MultiAgents Framework?
 
-MultiAgents is a hybrid event-driven orchestration framework that combines:
-- **Centralized orchestration** for clear workflow logic
-- **Event-driven communication** for scalable, decoupled architecture
-- **Built-in monitoring** for production observability
-- **DSPy integration** for LLM-powered intelligent workers
+MultiAgents is a production-ready framework for building intelligent multi-agent systems that combines:
+- **🧠 LLM-First Design** - Built-in DSPy integration with Gemini, GPT, Claude support
+- **💬 Conversational AI** - Intelligent routing between conversation and task execution
+- **🔧 Tool Integration** - Easy integration with web search, calculators, APIs
+- **🎭 Multi-Agent Collaboration** - Specialized agents working together seamlessly
+- **📊 Production Monitoring** - Complete observability designed for LLM workflows
+- **🔄 Event-Driven** - Scalable async communication perfect for AI workloads
+
+⚠️ **Experimental**: This framework is in active development. APIs may change between versions.
 
 ## Prerequisites
 
@@ -18,7 +24,36 @@ MultiAgents is a hybrid event-driven orchestration framework that combines:
 
 ## Installation
 
-### 1. Start Redis
+### Option 1: Install from PyPI (Recommended)
+
+```bash
+# Install the framework
+pip install multiagents-framework
+
+# Or with uv (faster)
+uv add multiagents-framework
+
+# Verify installation
+multiagents --version
+multiagents --help
+```
+
+### Option 2: Development Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/xavierau/multiagents.git
+cd multiagents
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install in development mode
+pip install -e .
+```
+
+### 3. Start Redis
 
 The framework requires Redis for event communication and state storage.
 
@@ -36,33 +71,14 @@ docker run -d -p 6379:6379 redis:alpine
 redis-cli ping  # Should return PONG
 ```
 
-### 2. Set Up the Project
+### 4. Run Examples
 
 ```bash
-# Navigate to your multiagents directory
-cd /path/to/multiagents
+# Interactive examples menu
+multiagents examples
 
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### 3. Verify Installation
-
-```bash
-# Run the simple example
+# Or from source
 python run_examples.py
-
-# Or run directly
-python -c "
-import sys; sys.path.insert(0, '.')
-import asyncio
-from examples.simple_workflow import main
-asyncio.run(main())
-"
 ```
 
 ## Your First Workflow
@@ -252,13 +268,14 @@ State: running, Step: save
 
 ## Next Steps
 
-Now that you have a working workflow, explore these topics:
+Now that you have a working workflow, explore these LLM-focused topics:
 
-1. **[Worker Development Guide](worker-development.md)** - Learn about advanced worker patterns
-2. **[Examples](../examples/)** - Study the complete e-commerce example
-3. **[Error Handling Tutorial](../tutorials/error-handling.md)** - Add compensations and retry logic
-4. **[Monitoring Guide](monitoring.md)** - Set up production monitoring
-5. **[DSPy Integration](dspy-integration.md)** - Add LLM-powered workers
+1. **🤖 [Smart Research Assistant Example](../examples/smart_research_assistant/)** - Complete conversational AI system
+2. **💬 [Interactive Chatbot Example](../examples/chatbot/)** - Multi-personality conversational AI
+3. **[DSPy Integration Guide](dspy-integration.md)** - Build LLM-powered agents
+4. **[Worker Development Guide](worker-development.md)** - Advanced worker patterns for AI
+5. **[Monitoring Guide](monitoring.md)** - Production monitoring for LLM workflows
+6. **[Error Handling Tutorial](../tutorials/error-handling.md)** - Robust error handling for AI systems
 
 ## Common Issues
 
