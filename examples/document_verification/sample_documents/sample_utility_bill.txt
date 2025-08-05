@@ -1,0 +1,50 @@
+PACIFIC GAS & ELECTRIC COMPANY
+Customer Service: 1-800-PGE-5000
+www.pge.com
+
+MONTHLY STATEMENT
+
+Account Number: 1234-567890
+Service Address: 456 Oak Street
+                San Francisco, CA 94102
+
+Billing Date: October 15, 2024
+Due Date: November 8, 2024
+
+Customer: JOHN M. SMITH
+Billing Address: 456 Oak Street
+                San Francisco, CA 94102
+
+Previous Balance: $145.67
+Payment Received (10/05): -$145.67
+Current Charges: $178.45
+
+AMOUNT DUE: $178.45
+
+Electric Service Summary:
+Service Period: 09/14/2024 to 10/14/2024 (30 days)
+Meter Number: E1234567
+
+Previous Reading: 12,345 kWh
+Current Reading: 12,678 kWh
+Usage: 333 kWh
+
+Rate Schedule: E-1 Residential Service
+
+Electricity Charges:
+Baseline Allowance (130 kWh @ $0.32/kWh): $41.60
+101% to 130% of Baseline (39 kWh @ $0.38/kWh): $14.82
+131% to 200% of Baseline (164 kWh @ $0.42/kWh): $68.88
+
+Delivery Charges: $42.15
+Public Purpose Programs: $8.50
+State Taxes & Fees: $2.50
+
+Total Current Electric Charges: $178.45
+
+Important Messages:
+- Conserve energy during peak hours (4-9 PM)
+- Sign up for Budget Billing to spread costs evenly
+- Consider Time-of-Use rates to save money
+
+Thank you for choosing PG&E as your energy provider.

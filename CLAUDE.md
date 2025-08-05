@@ -113,11 +113,15 @@ mypy multiagents/
 ### Key Implementation Details
 
 1. **Event Types**: CommandEvent, ResultEvent, ErrorEvent, CompensationEvent, StatusEvent
-2. **Worker Types**: Function-based workers via @worker decorator, DSPy-powered workers via @dspy_worker
+2. **Worker Types**: 
+   - Function-based workers via @worker decorator
+   - Enhanced DSPy-powered workers via @dspy_worker (with tool support, ReAct/CodeAct patterns)
+   - Tool definitions via @tool decorator for reusable functions
 3. **Workflow Definition**: Fluent API with WorkflowBuilder, support for compensations
 4. **State Persistence**: Redis-based with automatic expiration
 5. **Worker Management**: WorkerManager handles lifecycle, event subscriptions, and health monitoring
-6. **Monitoring**: File-based logging, event lifecycle tracking, worker performance metrics, error tracking
+6. **DSPy Integration**: Real DSPy modules with reasoning patterns, tool integration, training data collection
+7. **Monitoring**: File-based logging, event lifecycle tracking, worker performance metrics, error tracking
 
 ### Monitoring & Observability
 
@@ -174,6 +178,121 @@ event_bus = RedisEventBus(event_monitor=event_monitor, logger=logger)
 worker_manager = WorkerManager(event_bus, worker_monitor=worker_monitor, logger=logger)
 ```
 
+### Enhanced DSPy Worker System
+
+The framework features a powerful DSPy integration with tool support and multiple reasoning patterns:
+
+#### **Worker Types**
+
+```python
+from multiagents import dspy_worker, worker, tool
+
+# 1. Basic function worker
+@worker("process_data")
+async def process_data(context: dict) -> dict:
+    return {"processed": context["data"]}
+
+# 2. Simple DSPy signature worker (backward compatible)
+@dspy_worker("text_classifier", signature="text -> sentiment: str, confidence: float")
+async def classify_text(context: dict) -> dict:
+    # DSPy handles the LLM call, additional processing here
+    return {"needs_review": context.get("confidence", 0) < 0.7}
+
+# 3. Enhanced DSPy worker with reasoning
+@dspy_worker("summarizer", 
+            signature="document -> summary: str, key_points: list[str]",
+            reasoning="chain_of_thought")
+async def summarize_document(context: dict) -> dict:
+    return {"word_count": len(context.get("summary", "").split())}
+```
+
+#### **Tool System**
+
+```python
+# Define reusable tools
+@tool("web_search")
+async def search_web(query: str) -> list[str]:
+    """Search the web for information."""
+    # Real implementation with actual web search API
+    import httpx
+    async with httpx.AsyncClient() as client:
+        # Use actual search API here
+        response = await client.get(f"https://api.search.com?q={query}")
+        return response.json().get("results", [])
+
+@tool("database_query")
+def query_database(table: str, filters: dict) -> dict:
+    """Query database with filters."""
+    # Real database query implementation
+    import sqlite3
+    conn = sqlite3.connect("app.db")
+    # Execute actual query
+    cursor = conn.execute(f"SELECT * FROM {table} WHERE ...")
+    return {"results": cursor.fetchall()}
+```
+
+#### **Tool-Enabled Workers with ReAct**
+
+```python
+# Research assistant with real tools
+@dspy_worker("research_assistant",
+            signature="question -> comprehensive_answer: str, sources: list[str]",
+            tools=[search_web, query_database],
+            reasoning="react",
+            max_iters=5,
+            model="gemini/gemini-1.5-pro")
+async def research_assistant(context: dict) -> dict:
+    """Research assistant that can search web and query database."""
+    answer = context.get("comprehensive_answer", "")
+    sources = context.get("sources", [])
+    
+    return {
+        "answer_length": len(answer),
+        "source_count": len(sources),
+        "research_complete": True
+    }
+```
+
+#### **DSPy Configuration**
+
+```python
+import dspy
+import os
+
+# Configure DSPy with Gemini
+def configure_dspy():
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        raise ValueError("GOOGLE_API_KEY environment variable required")
+    
+    lm = dspy.LM(model="gemini/gemini-1.5-pro", api_key=api_key)
+    dspy.configure(lm=lm)
+
+# Use in your application
+configure_dspy()
+```
+
+#### **Available Reasoning Types**
+
+- **`predict`**: Simple signature execution (default)
+- **`chain_of_thought`**: Step-by-step reasoning with explanations
+- **`program_of_thought`**: Code-based reasoning for mathematical problems
+- **`react`**: Reasoning + Action pattern with tool usage
+- **`codeact`**: Code generation with tool assistance
+
+#### **Optimization-Ready Features**
+
+```python
+# Workers automatically collect training data
+worker = research_assistant
+
+# Get optimization data (for future EPIC-009 tasks)
+opt_data = worker.get_optimization_data()
+print(f"Training examples: {len(opt_data['training_examples'])}")
+print(f"Success rate: {opt_data['success_rate']}")
+print(f"Available tools: {opt_data['available_tools']}")
+```
+
 ### Next Steps
 
 1. **Testing**: Add comprehensive unit and integration tests
@@ -196,3 +315,4 @@ worker_manager = WorkerManager(event_bus, worker_monitor=worker_monitor, logger=
 ## Recent Memories
 
 - Remember to use this new project management tool. Review these files if something gets stuck
+- For creating example or anything, prefer using the real dspy lm gemini. not hardcode the logic

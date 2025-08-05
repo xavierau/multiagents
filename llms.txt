@@ -1,32 +1,40 @@
 # MultiAgents Framework
 
-A hybrid event-driven orchestration framework for building intelligent, multi-step, and fault-tolerant applications.
+🚀 **LLM-Powered Multi-Agent Orchestration Framework**
+
+A hybrid event-driven orchestration framework designed specifically for **LLM agents and AI developers**. Build intelligent, conversational, and autonomous multi-agent systems with built-in DSPy integration, real-time collaboration, and production-ready tooling.
 
 ## Overview
 
-MultiAgents combines orchestration (centralized control) with event-driven architecture (loose coupling) to enable complex workflows with built-in compensation mechanisms (saga pattern). The framework is designed for building resilient, scalable applications with support for LLM integration through DSPy.
+MultiAgents combines orchestration (centralized control) with event-driven architecture (loose coupling) to enable complex workflows with built-in compensation mechanisms (saga pattern). The framework is designed for building resilient, scalable AI applications with native LLM support through DSPy.
+
+## GitHub Repository
+
+📚 **Complete documentation, examples, and source code available at:**
+**[https://github.com/xavierau/multiagents](https://github.com/xavierau/multiagents)**
 
 ## Documentation Index
 
 ### Core Documentation
+
+#### 🎯 Quick Start
+- **NEW**: `/docs/QUICK_REFERENCE.md` - One-page developer reference with all essential patterns
+- `/docs/guides/getting-started.md` - Step-by-step guide for new users
+- `/README.md` - Project overview and installation guide
+- `/CLAUDE.md` - Project-specific instructions and conventions
 
 #### Framework Understanding
 - `/docs/llm/framework-overview.md` - Complete framework architecture, core concepts, design principles, and essential patterns
 - `/docs/guides/architecture.md` - Deep dive into hybrid orchestration/choreography architecture
 - `/docs/README.md` - Main documentation entry point with navigation structure
 
-#### API Reference
+#### API Reference (Complete & Production-Ready)
 - `/docs/llm/api-reference.md` - Comprehensive API patterns, data structures, and complete application templates
-- `/docs/api/core.md` - Core interfaces and contracts (IWorker, IEventBus, IOrchestrator)
+- `/docs/api/core.md` - Core interfaces and contracts (SagaContext, exceptions, factory functions)
 - `/docs/api/orchestrator.md` - Orchestrator API for workflow management
-- `/docs/api/workers.md` - Worker SDK API and decorators
+- `/docs/api/workers.md` - Worker SDK API and decorators (@worker, @dspy_worker)
 - `/docs/api/event_bus.md` - Event bus communication patterns
 - `/docs/api/monitoring.md` - Monitoring and observability APIs
-
-#### Quick References
-- `/docs/llm/quick-reference.md` - Essential code snippets and common patterns for rapid development
-- `/docs/guides/getting-started.md` - Step-by-step guide for new users
-- `/CLAUDE.md` - Project-specific instructions and conventions
 
 ### Implementation Patterns
 
@@ -43,22 +51,33 @@ MultiAgents combines orchestration (centralized control) with event-driven archi
 - `/docs/tutorials/dspy-workers.md` - Tutorial on building intelligent workers with DSPy
 - `/docs/llm/dspy-integration-patterns.md` - (referenced in llm docs)
 
-### Examples
+### Examples (Working Applications)
 
-#### Simple Workflow Example
-- `/examples/simple_workflow.py` - Basic data processing workflow
-- `/docs/examples/simple-workflow.md` - Detailed walkthrough
+#### 💬 Smart Research Assistant (NEW)
+- `/examples/smart_research_assistant/` - LLM-powered conversational research system
+- Multi-agent collaboration with intelligent routing
+- Real Google Custom Search API integration
+- Production-ready configuration system
 
-#### E-commerce Order Processing
+#### 🤖 Interactive Chatbot (NEW)
+- `/examples/chatbot/` - Multi-personality conversational AI
+- DSPy-powered natural conversations
+- Configurable personalities and context management
+
+#### 🛒 E-commerce Order Processing
 - `/examples/ecommerce_order/main.py` - Complete saga pattern implementation
 - `/examples/ecommerce_order/workers.py` - Worker implementations with compensations
 - `/examples/ecommerce_order/workflow.py` - Workflow definition
 - `/docs/examples/ecommerce-order.md` - Comprehensive documentation
-- `/examples/ecommerce_order/generated_diagrams/ecommerce_workflow_ascii.txt` - Visual workflow representation
+- `/examples/ecommerce_order/generated_diagrams/` - Visual workflow representations
 
-#### Monitoring Demo
-- `/examples/monitoring_demo.py` - Monitoring and observability features
+#### 📊 Monitoring Demo
+- `/examples/monitoring_example.py` - Production monitoring and observability
 - `/docs/examples/monitoring-demo.md` - Monitoring patterns and usage
+
+#### Simple Workflow Example
+- `/examples/simple_workflow.py` - Basic data processing workflow
+- `/docs/examples/simple-workflow.md` - Detailed walkthrough
 
 ### Tutorials
 

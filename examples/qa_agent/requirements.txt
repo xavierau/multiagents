@@ -1,0 +1,6 @@
+multiagents-framework
+redis
+dspy-ai
+pyyaml
+google-generativeai
+pathlib

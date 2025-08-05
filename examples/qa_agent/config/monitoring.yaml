@@ -1,0 +1,14 @@
+logging:
+  default_logger: "composite"
+  level: "INFO"
+  file_path: "./logs/qa_agent.log"
+  console_format: "simple"
+  
+event_monitoring:
+  enabled: true
+  trace_retention_hours: 24
+  
+worker_monitoring:
+  enabled: true
+  health_check_interval_seconds: 30
+  performance_tracking: true

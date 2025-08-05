@@ -2,6 +2,7 @@ from .interface import IWorker, IWorkerRegistry
 from .base_worker import BaseWorker, WorkerConfig
 from .decorators import worker, dspy_worker
 from .dspy_wrapper import DSPyAgent, DSPySignature
+from .dspy_modules import tool, WorkerTool
 from .worker_manager import WorkerManager
 
 __all__ = [
@@ -11,6 +12,8 @@ __all__ = [
     "WorkerConfig",
     "worker",
     "dspy_worker",
+    "tool",
+    "WorkerTool",
     "DSPyAgent",
     "DSPySignature",
     "WorkerManager",

@@ -1,0 +1,193 @@
+# Document Verification System - Monitoring Configuration
+# =====================================================
+
+logging:
+  # Logger type: file, console, or composite
+  default_logger: "composite"
+  level: "INFO"
+  
+  # File logging configuration
+  file_path: "./logs/document_verification.log"
+  max_file_size_mb: 100
+  backup_count: 5
+  
+  # Console logging for development
+  console_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Structured logging for production
+  structured_logging: true
+  json_format: true
+
+# Event monitoring configuration  
+event_monitoring:
+  enabled: true
+  
+  # Event lifecycle tracking
+  trace_events: true
+  trace_retention_hours: 48
+  
+  # Performance metrics
+  track_latency: true
+  latency_percentiles: [50, 90, 95, 99]
+  
+  # Event correlation
+  correlation_tracking: true
+  max_correlation_entries: 10000
+  
+  # Cleanup and retention
+  cleanup_interval_minutes: 60
+  max_event_age_hours: 24
+
+# Worker performance monitoring
+worker_monitoring:
+  enabled: true
+  
+  # Health checks
+  health_check_enabled: true
+  health_check_interval_seconds: 30
+  health_check_timeout_seconds: 10
+  
+  # Performance tracking
+  track_execution_time: true
+  track_success_rate: true
+  performance_window_minutes: 10
+  
+  # Worker-specific thresholds
+  worker_thresholds:
+    document_processor:
+      max_execution_time_seconds: 30
+      min_success_rate: 0.95
+    
+    document_classifier:
+      max_execution_time_seconds: 15
+      min_success_rate: 0.90
+    
+    identity_document_verifier:
+      max_execution_time_seconds: 45
+      min_success_rate: 0.85
+    
+    financial_document_analyzer:
+      max_execution_time_seconds: 60
+      min_success_rate: 0.90
+    
+    fraud_detector:
+      max_execution_time_seconds: 30
+      min_success_rate: 0.95
+  
+  # Alerting
+  alerting_enabled: true
+  alert_thresholds:
+    worker_failure_rate: 0.1  # Alert if >10% failure rate
+    avg_execution_time_seconds: 120  # Alert if avg time >2 minutes
+    queue_depth: 100  # Alert if queue has >100 pending items
+
+# System metrics collection
+system_monitoring:
+  enabled: true
+  
+  # Resource monitoring
+  track_memory_usage: true
+  track_cpu_usage: true
+  track_disk_usage: false
+  
+  # Collection intervals
+  metrics_collection_interval_seconds: 60
+  system_health_check_interval_seconds: 300
+  
+  # Retention
+  metrics_retention_hours: 72
+  
+# Notification configuration
+notifications:
+  enabled: true
+  
+  # Notification channels
+  channels:
+    email:
+      enabled: false  # Disabled for demo
+      smtp_server: "smtp.example.com"
+      smtp_port: 587
+      username: "alerts@example.com" 
+      recipients: ["admin@example.com", "ops@example.com"]
+    
+    slack:
+      enabled: false  # Disabled for demo
+      webhook_url: "https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK"
+      channel: "#document-verification-alerts"
+    
+    console:
+      enabled: true  # Always show alerts in console for demo
+  
+  # Alert conditions
+  alert_conditions:
+    high_error_rate:
+      threshold: 0.1
+      window_minutes: 5
+      message: "High error rate detected in document verification"
+    
+    processing_delays:
+      threshold_seconds: 300
+      window_minutes: 10
+      message: "Document processing experiencing delays"
+    
+    fraud_detection_alert:
+      threshold: "HIGH"
+      message: "High-risk document detected - immediate review required"
+
+# Development and debugging
+development:
+  # Debug logging
+  debug_mode: false
+  verbose_logging: false
+  
+  # Mock services for testing
+  mock_external_apis: true
+  mock_database_calls: true
+  
+  # Performance profiling
+  enable_profiling: false
+  profile_output_path: "./profiles/"
+  
+# Production optimizations
+production:
+  # Performance tuning
+  worker_pool_size: 10
+  max_concurrent_workflows: 50
+  event_batch_size: 100
+  
+  # Security
+  encrypt_sensitive_data: true
+  audit_all_actions: true
+  
+  # Reliability
+  retry_failed_operations: true
+  max_retry_attempts: 3
+  retry_backoff_seconds: [1, 5, 15]
+  
+  # Resource limits
+  max_memory_usage_mb: 2048
+  max_cpu_usage_percent: 80
+  
+# Integration settings
+integrations:
+  # External monitoring systems
+  prometheus:
+    enabled: false
+    metrics_endpoint: "/metrics"
+    push_gateway_url: ""
+  
+  grafana:
+    enabled: false
+    dashboard_url: ""
+  
+  # Distributed tracing
+  jaeger:
+    enabled: false
+    agent_host: "localhost"
+    agent_port: 6831
+  
+  # Log aggregation
+  elasticsearch:
+    enabled: false
+    hosts: ["localhost:9200"]
+    index_prefix: "document-verification"

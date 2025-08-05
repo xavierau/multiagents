@@ -6,14 +6,14 @@ using a hybrid orchestration/choreography pattern.
 """
 
 from .orchestrator import Orchestrator, WorkflowBuilder, WorkflowDefinition
-from .worker_sdk import worker, dspy_worker, BaseWorker, DSPyAgent, WorkerManager
+from .worker_sdk import worker, dspy_worker, tool, BaseWorker, DSPyAgent, WorkerManager
 from .event_bus import IEventBus, Event, CommandEvent, ResultEvent
 from .monitoring import (
     MonitoringConfig, EventMonitor, WorkerMonitor, MetricsCollector,
     ILogger, FileLogger, ConsoleLogger, CompositeLogger
 )
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __all__ = [
     # Orchestrator
@@ -24,6 +24,7 @@ __all__ = [
     # Worker SDK
     "worker",
     "dspy_worker",
+    "tool",
     "BaseWorker",
     "DSPyAgent",
     "WorkerManager",

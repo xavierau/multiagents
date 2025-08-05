@@ -1,0 +1,23 @@
+PASSPORT
+United States of America
+
+SURNAME: SMITH
+GIVEN NAMES: JOHN MICHAEL  
+NATIONALITY: USA
+DATE OF BIRTH: 15 JAN 1985
+PLACE OF BIRTH: NEW YORK, NY
+
+PASSPORT NO: 123456789
+DATE OF ISSUE: 10 MAY 2020  
+DATE OF EXPIRATION: 10 MAY 2030
+ISSUING AUTHORITY: United States Department of State
+
+SEX: M
+HEIGHT: 5'10"
+EYES: BROWN
+
+This passport contains 32 pages.
+The Secretary of State of the United States hereby requests
+all whom it may concern to permit the citizen/national of the
+United States named herein to pass without delay or hindrance
+and in case of need to give all lawful aid and protection.

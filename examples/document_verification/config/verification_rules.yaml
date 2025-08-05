@@ -1,0 +1,364 @@
+# Document Verification Rules Configuration
+# ========================================
+
+# Global verification settings
+global_settings:
+  # File processing limits
+  max_file_size_mb: 50
+  max_processing_time_seconds: 300
+  supported_formats: [".pdf", ".jpg", ".jpeg", ".png", ".tiff", ".doc", ".docx", ".txt"]
+  
+  # Quality thresholds
+  min_ocr_confidence: 0.7
+  min_classification_confidence: 0.8
+  min_verification_confidence: 0.75
+  
+  # Risk management
+  auto_approve_threshold: 0.9
+  auto_reject_threshold: 0.3
+  manual_review_threshold: 0.7
+
+# Document type specific rules
+document_types:
+  drivers_license:
+    display_name: "Driver's License"
+    category: "identity"
+    
+    # Required fields for this document type
+    required_fields:
+      - "license_number"
+      - "dates"
+      - "addresses" 
+      - "full_name"
+    
+    # Validation rules
+    validation_rules:
+      license_number:
+        pattern: "^[A-Z0-9]{6,12}$"
+        required: true
+      
+      expiration_date:
+        max_age_days: 0  # Must not be expired
+        required: true
+      
+      issue_date:
+        max_age_years: 10  # License can't be older than 10 years
+        required: true
+    
+    # Verification settings
+    verification:
+      database_check_required: true
+      fraud_check_level: "standard"
+      manual_review_required: false
+    
+    # Compliance requirements
+    compliance:
+      signature_required: false
+      photo_required: true
+      hologram_check: true
+      
+  passport:
+    display_name: "Passport"
+    category: "identity"
+    
+    required_fields:
+      - "passport_number"
+      - "dates"
+      - "country_code"
+      - "full_name"
+    
+    validation_rules:
+      passport_number:
+        pattern: "^[A-Z0-9]{6,12}$"
+        required: true
+      
+      expiration_date:
+        min_validity_days: 180  # Must be valid for at least 6 months
+        required: true
+    
+    verification:
+      database_check_required: true
+      fraud_check_level: "enhanced"
+      manual_review_required: false
+    
+    compliance:
+      signature_required: true
+      photo_required: true
+      security_features_check: true
+
+  bank_statement:
+    display_name: "Bank Statement"
+    category: "financial"
+    
+    required_fields:
+      - "account_number"
+      - "monetary_amounts"
+      - "dates"
+      - "bank_name"
+    
+    validation_rules:
+      statement_date:
+        max_age_days: 90  # Statement must be within 90 days
+        required: true
+      
+      account_number:
+        min_length: 4
+        required: true
+        masked_acceptable: true  # Can be partially masked (****1234)
+      
+      balance_amounts:
+        min_value: 0
+        currency_required: true
+    
+    verification:
+      database_check_required: false  # Bank statements don't typically have public databases
+      fraud_check_level: "standard"
+      manual_review_required: false
+    
+    compliance:
+      signature_required: false
+      official_letterhead: true
+      transaction_details: true
+
+  tax_document:
+    display_name: "Tax Document (W-2, 1099, etc.)"
+    category: "financial"
+    
+    required_fields:
+      - "ssn"
+      - "monetary_amounts"
+      - "dates"
+      - "employer_info"
+    
+    validation_rules:
+      tax_year:
+        max_age_years: 3  # Tax documents valid for 3 years
+        required: true
+      
+      ssn:
+        pattern: "^\\d{3}-\\d{2}-\\d{4}$"
+        required: true
+        can_be_masked: true
+      
+      wage_amounts:
+        min_value: 0
+        required: true
+    
+    verification:
+      database_check_required: false
+      fraud_check_level: "enhanced"
+      manual_review_required: true  # Tax documents often require manual review
+    
+    compliance:
+      signature_required: false
+      irs_format_compliance: true
+      employer_ein_required: true
+
+  utility_bill:
+    display_name: "Utility Bill"
+    category: "proof_of_address"
+    
+    required_fields:
+      - "addresses"
+      - "dates"
+      - "account_number"
+      - "utility_company"
+    
+    validation_rules:
+      bill_date:
+        max_age_days: 90
+        required: true
+      
+      service_address:
+        format_validation: true
+        required: true
+    
+    verification:
+      database_check_required: false
+      fraud_check_level: "basic"
+      manual_review_required: false
+    
+    compliance:
+      signature_required: false
+      company_logo_required: true
+      usage_details_required: true
+
+# Fraud detection rules
+fraud_detection:
+  # Image-based indicators
+  image_quality_checks:
+    min_resolution_width: 600
+    min_resolution_height: 400
+    max_compression_artifacts: 0.3
+    blur_detection_threshold: 0.7
+  
+  # Content-based indicators
+  content_analysis:
+    font_consistency_check: true
+    alignment_check: true
+    spacing_irregularity_threshold: 0.3
+    
+  # Pattern-based indicators
+  suspicious_patterns:
+    - "multiple_date_formats"
+    - "inconsistent_fonts"
+    - "altered_text_detection"
+    - "copy_paste_artifacts"
+    - "digital_manipulation_signs"
+  
+  # Risk scoring
+  risk_weights:
+    low_ocr_confidence: 0.2
+    suspicious_patterns: 0.3
+    failed_database_verification: 0.4
+    missing_security_features: 0.2
+    inconsistent_information: 0.3
+
+# Compliance frameworks
+compliance_frameworks:
+  kyc_basic:
+    name: "Basic KYC Compliance"
+    requirements:
+      identity_verification: true
+      address_verification: true
+      document_authenticity: true
+      
+  kyc_enhanced:
+    name: "Enhanced KYC Compliance"
+    requirements:
+      identity_verification: true
+      address_verification: true
+      document_authenticity: true
+      biometric_verification: false  # Not implemented in this demo
+      watchlist_screening: false     # Not implemented in this demo
+      
+  aml_basic:
+    name: "Basic AML Compliance"
+    requirements:
+      source_of_funds: false
+      transaction_monitoring: false
+      risk_assessment: true
+      
+  gdpr:
+    name: "GDPR Compliance"
+    requirements:
+      data_encryption: true
+      consent_tracking: true
+      right_to_deletion: true
+      audit_trail: true
+
+# Processing workflows
+workflow_configurations:
+  standard_verification:
+    name: "Standard Document Verification"
+    steps:
+      - "document_processing"
+      - "document_classification"
+      - "identity_verification"
+      - "compliance_check"
+      - "fraud_detection"
+      - "verification_decision"
+      - "result_archiving"
+      - "notification_dispatch"
+    
+    parallel_processing:
+      enabled: false
+      max_parallel_workers: 3
+  
+  expedited_verification:
+    name: "Expedited Verification (Identity Only)"
+    steps:
+      - "document_processing"
+      - "document_classification"
+      - "identity_verification"
+      - "fraud_detection"
+      - "verification_decision"
+      - "notification_dispatch"
+    
+    skip_manual_review: true
+    auto_approve_threshold: 0.95
+  
+  enhanced_verification:
+    name: "Enhanced Verification (Full Analysis)"
+    steps:
+      - "document_processing"
+      - "document_classification"
+      - "identity_verification"
+      - "financial_analysis"
+      - "compliance_check"
+      - "fraud_detection"
+      - "verification_decision"
+      - "result_archiving"
+      - "notification_dispatch"
+    
+    require_manual_review: true
+    additional_checks:
+      - "cross_reference_verification"
+      - "historical_data_analysis"
+
+# Notification rules
+notification_rules:
+  approval:
+    recipients: ["reviewer@example.com"]
+    template: "document_approved"
+    priority: "normal"
+    
+  rejection:
+    recipients: ["reviewer@example.com", "compliance@example.com"]
+    template: "document_rejected"
+    priority: "high"
+    
+  fraud_alert:
+    recipients: ["security@example.com", "admin@example.com"]
+    template: "fraud_detected"
+    priority: "critical"
+    immediate_notification: true
+    
+  manual_review_required:
+    recipients: ["reviewer@example.com"]
+    template: "manual_review_needed"
+    priority: "normal"
+    
+  compliance_failure:
+    recipients: ["compliance@example.com", "reviewer@example.com"]
+    template: "compliance_failed"
+    priority: "high"
+
+# System integration settings
+integrations:
+  # Mock external services for demo
+  dmv_database:
+    enabled: false
+    mock_responses: true
+    timeout_seconds: 30
+    
+  passport_verification_service:
+    enabled: false
+    mock_responses: true
+    timeout_seconds: 45
+    
+  fraud_detection_service:
+    enabled: false
+    mock_responses: true
+    confidence_threshold: 0.8
+    
+  ocr_service:
+    provider: "mock"  # In production: "google_vision", "aws_textract", "azure_cognitive"
+    confidence_threshold: 0.7
+    language_support: ["en", "es", "fr"]
+
+# Performance and scaling
+performance:
+  # Caching
+  enable_result_caching: true
+  cache_ttl_hours: 24
+  max_cache_entries: 10000
+  
+  # Rate limiting
+  max_requests_per_minute: 100
+  max_concurrent_processing: 50
+  
+  # Resource management
+  memory_limit_mb: 1024
+  processing_timeout_seconds: 300
+  cleanup_interval_minutes: 60

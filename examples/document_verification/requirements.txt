@@ -1,0 +1,57 @@
+# Document Verification System Requirements
+# ========================================
+
+# Core multiagents framework (from parent directory)
+# Note: Install the multiagents package first with: pip install -e ../../
+
+# DSPy for AI-powered document analysis
+dspy-ai>=2.4.0
+
+# Document processing libraries
+PyMuPDF>=1.23.0          # PDF text extraction
+Pillow>=10.0.0           # Image processing for OCR
+pytesseract>=0.3.10      # OCR engine (optional, for real OCR)
+
+# HTTP client for API integrations
+httpx>=0.25.0
+
+# Configuration and data handling
+PyYAML>=6.0              # YAML configuration files
+pydantic>=2.0.0          # Data validation and serialization
+
+# Database support
+sqlite3                  # Built into Python, used for demo storage
+
+# Testing framework
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Development tools (optional)
+black>=23.0.0            # Code formatting
+ruff>=0.1.0              # Fast Python linter
+mypy>=1.5.0              # Type checking
+
+# Production dependencies (optional)
+redis>=4.5.0             # Required for event bus
+uvloop>=0.17.0           # High-performance event loop (Unix only)
+
+# Monitoring and observability (optional)
+prometheus-client>=0.17.0   # Metrics collection
+structlog>=23.0.0           # Structured logging
+
+# External service integrations (optional - for production)
+# google-cloud-vision>=3.4.0      # Google Cloud Vision API for OCR
+# boto3>=1.28.0                    # AWS services (Textract, etc.)
+# azure-cognitiveservices-vision-computervision>=0.9.0  # Azure Computer Vision
+
+# Security (for production)
+cryptography>=41.0.0     # Encryption for sensitive data
+bcrypt>=4.0.0            # Password hashing
+
+# Performance (optional)
+numpy>=1.24.0            # Numerical computations
+pandas>=2.0.0            # Data analysis (for batch processing)
+
+# Web framework (if building API endpoints)
+# fastapi>=0.100.0
+# uvicorn>=0.23.0
