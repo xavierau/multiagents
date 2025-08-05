@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multiagents-framework"
-version = "0.1.2"
+version = "0.1.3"
 description = "Hybrid Event-Driven Orchestration Framework"
 readme = "README.md"
 requires-python = ">=3.8"

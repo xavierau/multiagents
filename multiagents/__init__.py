@@ -13,7 +13,7 @@ from .monitoring import (
     ILogger, FileLogger, ConsoleLogger, CompositeLogger
 )
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __all__ = [
     # Orchestrator
