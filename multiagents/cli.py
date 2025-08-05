@@ -81,20 +81,20 @@ def install_agent() -> bool:
     agents_dir.mkdir(parents=True, exist_ok=True)
     
     # Get agent file from package
-    agent_path = get_package_resource_path("agents/multiagents.md")
+    agent_path = get_package_resource_path("agents/multiagents-architect.md")
     if not agent_path or not agent_path.exists():
         print("Error: MultiAgents Claude Code agent not found in package")
         return False
     
     # Copy agent to project
-    dest_path = agents_dir / "multiagents.md"
+    dest_path = agents_dir / "multiagents-architect.md"
     try:
         shutil.copy2(agent_path, dest_path)
         print(f"✅ Installed MultiAgents Claude Code agent")
         print(f"📁 Agent installed at: {dest_path}")
         print("\n🤖 Usage:")
         print("   Start Claude Code in this directory")
-        print("   Type '@multiagents' to activate the agent")
+        print("   Type '@multiagents-architect' to activate the agent")
         return True
     except Exception as e:
         print(f"Error installing agent: {e}")
